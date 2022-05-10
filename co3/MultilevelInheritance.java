@@ -1,87 +1,54 @@
-/* Create a class ‘Person’ with data members Name, Gender, Address, Age  and a constructor 
-to initialize the data members and another class ‘Employee’ that inherits the properties of 
-class  Person  and  also  contains  its  own  data  members  like  Empid,  Company_name, 
-Qualification, Salary and its own constructor. Create another class ‘Teacher’ that inherits 
-the  properties  of  class  Employee  and  contains  its  own  data  members  like  Subject, 
-Department,  Teacherid  and  also  contain  constructors  and  methods  to  display  the  data 
-members. Use array of objects to display details of N teachers.*/
-
+/* Create classes Student and Sports. Create another class Result inherited from Student and 
+Sports. Display the academic and sports score of a student
+*/
 import java.util.Scanner;
-class Person{
-	String Name;
-	String Gender;
-	String Address;
-	int Age;
-	Person(){
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter the Name:");
-	Name=sc.next();
-	System.out.println("Enter the Gender:");
-	Gender=sc.next();
-	System.out.println("Enter the Address:");
-	Address=sc.next();
-	System.out.println("Enter the Age:");
-	Age=sc.nextInt();
-	}
+
+interface Student{
+    public void Details(Scanner read);
+    public void AcademicScore(Scanner read);
 }
-class Employee extends Person{
-	int EmpId;
-	String College_name;
-	String Qualification;
-	int Salary;
-	Employee(){
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the EmpId:");
-		EmpId=sc.nextInt();
-		System.out.println("Enter the College_name:");
-		College_name=sc.next();
-		System.out.println("Enter the Qualification:");
-		Qualification=sc.next();
-		System.out.println("Enter the Salary:");
-		Salary=sc.nextInt();
-	}
+
+interface Sports{
+    public void Score(Scanner read);
 }
-class Teacher extends Employee{
-	String Subject;
-	String Department;
-	String Teacherid;
-	Teacher(){
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the Subject:");
-		Subject=sc.next();
-		System.out.println("Enter the Department:");
-		Department=sc.next();
-		System.out.println("Enter the Teacherid:");
-		Teacherid=sc.next();
-		System.out.println();
-	}
-	void display(){
-		System.out.println();
-		System.out.println("Name:"+Name);
-		System.out.println("Gender:"+Gender);
-		System.out.println("Address:"+Address);
-		System.out.println("Age:"+Age);
-		System.out.println("EmpId:"+EmpId);
-		System.out.println("Company_name:"+College_name);
-		System.out.println("Qualification:"+Qualification);
-		System.out.println("Salary:"+Salary);
-		System.out.println("Subject:"+Subject);
-		System.out.println("Department:"+Department);
-		System.out.println("Teacherid:"+Teacherid);
-		System.out.println();
-	}
+
+class Result implements Student,Sports{
+    String SName;
+    int RollNo,Max,Mark,Score;
+    Result(Scanner read){
+        Details(read);
+        AcademicScore(read);
+        Score(read);
+    }
+    public void Details(Scanner read){
+        System.out.print("Enter Student Name : ");
+        SName=read.nextLine();
+        System.out.print("Roll number of the student : ");
+        RollNo= Integer.parseInt(read.nextLine());
+    }
+    public void AcademicScore(Scanner read){
+        System.out.print("Enter the Maximum mark : ");
+        Max= read.nextInt();
+        System.out.print("Enter the mark optained : ");
+        Mark = read.nextInt();
+    }
+    public void Score(Scanner read){
+        System.out.print("Enter the sports score : ");
+        Score=read.nextInt();
+    }
+    void Display(){
+        System.out.println("\n STUDENT INFORMATION");
+        System.out.println("\nName of the Student : "+ SName);
+        System.out.println("Roll number of the Student : "+ RollNo);
+        System.out.println("Mark optained ("+Max+") : "+Mark);
+        System.out.println("Mark optained Sports (100): "+ Score);
+    }
 }
-class MultilevelInheritance{
-	public static void main(String ar[]){
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the no. of teachers");
-		int n=sc.nextInt();
-		Teacher[] teacher=new Teacher[n];
-		for(int i=0;i<n;i++)
-		teacher[i]=new Teacher();
-		for(int i=0;i<n;i++){
-			System.out.println("details of teachers:");
-			teacher[i].display();
-		}
-	}
+
+public class MultilevelInheritance {
+    public static void main(String arg[]){
+        Scanner read = new Scanner(System.in);
+        Result r = new Result(read);
+        r.Display();
+    }
 }
